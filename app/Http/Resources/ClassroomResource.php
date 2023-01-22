@@ -21,7 +21,6 @@ class ClassroomResource extends JsonResource
         return [
             '_id' => $this->_id,
             'name' => $this->name,
-            'capacity' => $this->capacity,
             'students' => $student,
         ];
     }

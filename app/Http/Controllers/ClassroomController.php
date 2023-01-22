@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ClassroomsResource;
 use App\Models\Classroom;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class ClassroomController extends Controller
      */
     public function index()
     {
-        $classrooms = Classroom::all();
+        $classrooms = ClassroomsResource::collection(Classroom::all());
         return response()->json($classrooms);
     }
 
@@ -48,9 +49,10 @@ class ClassroomController extends Controller
      * @param  \App\Models\Classroom  $classroom
      * @return \Illuminate\Http\Response
      */
-    public function show(Classroom $classroom)
+    public function show($id)
     {
-        //
+        $classroom = new ClassroomsResource(Classroom::find($id));
+        return response()->json($classroom);
     }
 
     /**
@@ -71,9 +73,12 @@ class ClassroomController extends Controller
      * @param  \App\Models\Classroom  $classroom
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Classroom $classroom)
+    public function update(Request $request, $id)
     {
-        //
+        $classroom = Classroom::find($id);
+        $classroom->name = $request->name;
+        $classroom->save();
+        return response()->json($classroom);
     }
 
     /**
