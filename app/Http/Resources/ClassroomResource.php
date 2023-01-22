@@ -2,7 +2,9 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Student;
 use Illuminate\Http\Resources\Json\JsonResource;
+use MongoDB\BSON\ObjectId;
 
 class ClassroomResource extends JsonResource
 {
@@ -14,7 +16,13 @@ class ClassroomResource extends JsonResource
      */
     public function toArray($request)
     {
-        // $students = 
-        // return parent::toArray($request);
+        //pick up all student with id classroom to see detail student
+        $student = Student::select(['_id', 'name', 'classroom_id'])->where('classroom_id', '=', $this->_id)->get();
+        return [
+            '_id' => $this->_id,
+            'name' => $this->name,
+            'capacity' => $this->capacity,
+            'students' => $student,
+        ];
     }
 }

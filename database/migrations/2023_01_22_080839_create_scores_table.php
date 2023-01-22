@@ -23,7 +23,7 @@ class CreateScoresTable extends Migration
             $table->float('assignment_4');
             $table->float('daily_test_1');
             $table->float('daily_test_2');
-            $table->float('midterm_test');
+            $table->float('mid_test');
             $table->float('final_test');
             $table->timestamps();
         });

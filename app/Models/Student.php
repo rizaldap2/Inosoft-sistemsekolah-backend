@@ -8,6 +8,7 @@ use Jenssegers\Mongodb\Eloquent\Model;
 
 // call relational
 use App\Models\Classroom;
+use App\Models\Score;
 
 class Student extends Model
 {
@@ -19,4 +20,10 @@ class Student extends Model
     {
         return $this->belongsTo(Classroom::class);
     }
+
+    public function scores()
+    {
+        return $this->hasMany(Score::class);
+    }
+
 }

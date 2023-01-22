@@ -14,8 +14,8 @@ class ClassroomController extends Controller
      */
     public function index()
     {
-        
-        //
+        $classrooms = Classroom::all();
+        return response()->json($classrooms);
     }
 
     /**
@@ -36,7 +36,10 @@ class ClassroomController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $classroom = new Classroom();
+        $classroom->name = $request->name;
+        $classroom->save();
+        return response()->json($classroom);
     }
 
     /**
