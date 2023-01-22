@@ -19,5 +19,9 @@ class CounterScoreResource extends JsonResource
         $mid_test=$this->mid_test * 0.25;
         $final_test=$this->final_test * 0.4;
         $total_score=$assignment+$daily_test+$mid_test+$final_test;
+        return [
+            'subjet_name' => $this->subject->name,
+            'total_score' => $total_score,
+        ];
     }
 }

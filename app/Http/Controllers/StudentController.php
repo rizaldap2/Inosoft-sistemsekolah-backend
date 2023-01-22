@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\StudentResource;
+use App\Http\Resources\StudentsResource;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
@@ -14,7 +16,8 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
+        $student = StudentsResource::collection(Student::all());
+        return response()->json($student);
     }
 
     /**
@@ -44,9 +47,10 @@ class StudentController extends Controller
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function show(Student $student)
+    public function show($id)
     {
-        //
+        $student = Student::findorFail($id);
+        return response()->json(new StudentResource($student));   
     }
 
     /**

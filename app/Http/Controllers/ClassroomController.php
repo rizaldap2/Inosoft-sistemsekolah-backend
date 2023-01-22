@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\ClassroomsResource;
+use App\Http\Resources\ClassroomResource;
 use App\Models\Classroom;
 use Illuminate\Http\Request;
 
@@ -37,10 +38,9 @@ class ClassroomController extends Controller
      */
     public function store(Request $request)
     {
-        $classroom = new Classroom();
-        $classroom->name = $request->name;
-        $classroom->save();
-        return response()->json($classroom);
+        $classrooms['name'] = $request->name;
+        $classroom = Classroom::create($classrooms);
+        return response()->json(new ClassroomsResource($classroom));
     }
 
     /**
@@ -51,7 +51,7 @@ class ClassroomController extends Controller
      */
     public function show($id)
     {
-        $classroom = new ClassroomsResource(Classroom::find($id));
+        $classroom = new ClassroomResource(Classroom::find($id));
         return response()->json($classroom);
     }
 

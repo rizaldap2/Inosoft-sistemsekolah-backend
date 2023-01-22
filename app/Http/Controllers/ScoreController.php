@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ScoreResource;
 use App\Models\Score;
 use Illuminate\Http\Request;
 
@@ -35,7 +36,8 @@ class ScoreController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $score = Score::create($request->all());
+        return response()->json(new ScoreResource($score));
     }
 
     /**
@@ -44,9 +46,10 @@ class ScoreController extends Controller
      * @param  \App\Models\Score  $score
      * @return \Illuminate\Http\Response
      */
-    public function show(Score $score)
+    public function show($id)
     {
-        //
+        $score = Score::findorFail($id);
+        return response()->json(new ScoreResource($score));
     }
 
     /**
